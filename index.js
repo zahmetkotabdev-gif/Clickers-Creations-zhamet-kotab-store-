@@ -1,20 +1,17 @@
-// Old Reliable Starter (CJS)
+// SUPER SIMPLE TEST (CJS)
+const http = require('http');
+
 console.log("---------------------------------------");
-console.log("HEKAYATY: STARTER MOTOR ENGAGED");
+console.log("TEST LIGHT: STARTING UP...");
 console.log("Time:", new Date().toISOString());
+console.log("Port:", process.env.PORT);
 
-const path = require('path');
-const target = path.resolve(__dirname, 'dist-server/index.mjs');
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('SYSTEM TEST: If you see this, the server is ALIVE!\n');
+});
 
-console.log("Targeting:", target);
-
-// Use dynamic import to bridge to the modern engine
-import(target)
-  .then(() => {
-    console.log("✨ SUCCESS: Modern Engine Loaded!");
-  })
-  .catch((err) => {
-    console.error("🔥 CRITICAL STARTER ERROR:", err.message);
-    console.error(err.stack);
-    process.exit(1);
-  });
+const port = process.env.PORT || 3000;
+server.listen(port, '0.0.0.0', () => {
+  console.log("✅ SUCCESS: Test Light is ON and listening!");
+});
